@@ -6,6 +6,9 @@ using System.Text;
 [assembly: InternalsVisibleTo("Bigai.Tools.Feriados.Tests")]
 namespace Bigai.Tools.Feriados.Helpers
 {
+    /// <summary>
+    /// CsvHelper fornece metodos para a leitura de arquivos no formato CSV e conversão para array de strings.
+    /// </summary>
     internal static class CsvHelper
     {
         /// <summary>
