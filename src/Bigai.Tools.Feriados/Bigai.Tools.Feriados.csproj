@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Marcos Cruz, Bigai Consultoria Software</Authors>
+    <Copyright>Feriados - Copyright © 2020 - Bigai Consultoria Software.</Copyright>
+    <Company>Bigai Consultoria Software</Company>
+    <Description>Biblioteca de feriados no território Brasileiro.</Description>
+    <RepositoryUrl>https://github.com/marcos-cruz/Feriados.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Feriado Nacional Estadual Municipal</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\Projects\Bigai Software\Git\Feriados\src\Bigai.Tools.Feriados\Bigai.Tools.Feriados.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
