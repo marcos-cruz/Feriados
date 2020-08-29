@@ -6,7 +6,7 @@ using System.Linq;
 namespace Bigai.Tools.Feriados
 {
     /// <summary>
-    /// Estaá classe fornece métodos para pesquisa de feriados.
+    /// Esta classe fornece métodos para pesquisa de feriados.
     /// </summary>
     public class Feriado
     {
