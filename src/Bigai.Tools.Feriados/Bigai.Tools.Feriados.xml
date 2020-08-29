@@ -44,11 +44,6 @@
             Ano em que ocorre o feriado.
             </summary>
         </member>
-        <member name="P:Bigai.Tools.Feriados.Feriado.Feriados">
-            <summary>
-            Retorna uma lista com todos os feriados.
-            </summary>
-        </member>
         <member name="M:Bigai.Tools.Feriados.Feriado.Factory(System.Int32)">
             <summary>
             Retorna uma instância de Feriado.
@@ -56,27 +51,57 @@
             <param name="anoFeriado">Ano do calendário, composto de 4 digitos númericos.</param>
             <returns></returns>
         </member>
-        <member name="M:Bigai.Tools.Feriados.Feriado.FeriadosNacionais(System.String)">
+        <member name="M:Bigai.Tools.Feriados.Feriado.FeriadosNacionais(System.Int32,System.String)">
             <summary>
             Retorna uma lista com todos os feriados nacionais, para um país específico.
             </summary>
             <param name="pais">Sigla do estado onde ocorre o feriado, composta por 2 letras. Default 'BR'.</param>
+            <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
             <returns>Retorna uma lista com todos os feriados nacionais do país solicitado.</returns>
         </member>
-        <member name="M:Bigai.Tools.Feriados.Feriado.FeriadosEstaduais(System.String,System.String)">
+        <member name="M:Bigai.Tools.Feriados.Feriado.FeriadosEstaduais(System.Int32,System.String,System.String)">
             <summary>
             Retorna uma lista com todos os feriados estaduais, para um estado específico.
             </summary>
+            <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
             <param name="estado">Sigla do estado onde ocorre o feriado, composta por 2 letras.</param>
             <param name="pais">Sigla do estado onde ocorre o feriado, composta por 2 letras. Default 'BR'.</param>
             <returns>Retorna uma lista com todos os feriados estaduais.</returns>
         </member>
-        <member name="M:Bigai.Tools.Feriados.Feriado.FeriadosMunicipais(System.String)">
+        <member name="M:Bigai.Tools.Feriados.Feriado.FeriadosMunicipais(System.Int32,System.String)">
             <summary>
             Retorna uma lista com todos os feriados municipais, para um município especifico.
             </summary>
+            <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
             <param name="codigoMunicipio">Código do município, podendo ser informado o Código Federal ou Código do Ibge.</param>
             <returns>Retorna uma lista com todos os feriados municipais.</returns>
+        </member>
+        <member name="M:Bigai.Tools.Feriados.Feriado.Feriados(System.Int32,System.String)">
+            <summary>
+            Retorna uma lista com todos os feriados.
+            </summary>
+            <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
+            <param name="pais">Sigla do estado onde ocorre o feriado, composta por 2 letras. Default 'BR'.</param>
+            <returns>Retorna uma lista com todos os feriados nacionais, estaduais e municipais do ano e país especificados.</returns>
+        </member>
+        <member name="M:Bigai.Tools.Feriados.Feriado.FeriadosDoMes(System.Int32,System.Int32,System.String)">
+            <summary>
+            Retorna uma lista com todos os feriados do mês.
+            </summary>
+            <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
+            <param name="mesFeriado">Mês do feriado desejado. Default mês corrente.</param>
+            <param name="pais">Sigla do estado onde ocorre o feriado, composta por 2 letras. Default 'BR'.</param>
+            <returns>Retorna uma lista com todos os feriados que ocorrem no mês.</returns>
+        </member>
+        <member name="M:Bigai.Tools.Feriados.Feriado.FeriadosDoMes(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Retorna uma lista com todos os feriados do mês de um estado.
+            </summary>
+            <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
+            <param name="mesFeriado">Mês do feriado desejado. Default mês corrente.</param>
+            <param name="estado">Sigla do estado onde ocorre o feriado, composta por 2 letras.</param>
+            <param name="pais">Sigla do estado onde ocorre o feriado, composta por 2 letras. Default 'BR'.</param>
+            <returns>Retorna uma lista com todos os feriados que ocorrem no mês no estado.</returns>
         </member>
         <member name="M:Bigai.Tools.Feriados.Feriado.EhFeriado(System.DateTime)">
             <summary>

@@ -29,7 +29,7 @@ namespace Bigai.Tools.Feriados.Tests
             Feriado feriado = Feriado.Factory(anoDoFeriado);
 
             // Act
-            List<FeriadoCelebrado> feriados = feriado.Feriados.ToList();
+            List<FeriadoCelebrado> feriados = feriado.Feriados(anoDoFeriado).ToList();
 
             // Assert
             for (int i = 1, j = feriados.Count - 1; i < j; i++)
@@ -42,28 +42,28 @@ namespace Bigai.Tools.Feriados.Tests
         }
 
         [Theory]
-        [InlineData(2020, 14)]
-        public void Feriado_DeveRetornarListaCom14FeriadosNacionais(int anoDoFeriado, int feriadosEsperados)
+        [InlineData(2020, "BR", 14)]
+        public void Feriado_DeveRetornarListaCom14FeriadosNacionais(int anoDoFeriado, string pais, int feriadosEsperados)
         {
             // Arrange
             Feriado feriado = Feriado.Factory(anoDoFeriado);
 
             // Act
-            List<FeriadoCelebrado> feriadosNacionais = feriado.FeriadosNacionais("BR").ToList();
+            List<FeriadoCelebrado> feriadosNacionais = feriado.FeriadosNacionais(anoDoFeriado, pais).ToList();
 
             // Assert
             Assert.True(feriadosEsperados == feriadosNacionais.Count);
         }
 
         [Theory]
-        [InlineData(2020)]
-        public void Feriado_ListaDeFeriadosNacionaisDeveEstarEmOrdemCrescente(int anoDoFeriado)
+        [InlineData(2020, "BR")]
+        public void Feriado_ListaDeFeriadosNacionaisDeveEstarEmOrdemCrescente(int anoDoFeriado, string pais)
         {
             // Arrange
             Feriado feriado = Feriado.Factory(anoDoFeriado);
 
             // Act
-            List<FeriadoCelebrado> feriadosNacionais = feriado.FeriadosNacionais("BR").ToList();
+            List<FeriadoCelebrado> feriadosNacionais = feriado.FeriadosNacionais(anoDoFeriado, pais).ToList();
 
             // Assert
             for (int i = 1, j = feriadosNacionais.Count - 1; i < j; i++)
@@ -83,7 +83,7 @@ namespace Bigai.Tools.Feriados.Tests
             Feriado feriado = Feriado.Factory(anoDoFeriado);
 
             // Act
-            List<FeriadoCelebrado> feriadosEstaduais = feriado.FeriadosEstaduais(estado, pais).ToList();
+            List<FeriadoCelebrado> feriadosEstaduais = feriado.FeriadosEstaduais(anoDoFeriado, estado, pais).ToList();
 
             // Assert
             Assert.True(feriadosEsperados == feriadosEstaduais.Count);
@@ -97,7 +97,7 @@ namespace Bigai.Tools.Feriados.Tests
             Feriado feriado = Feriado.Factory(anoDoFeriado);
 
             // Act
-            List<FeriadoCelebrado> feriadosEstaduais = feriado.FeriadosEstaduais(estado, pais).ToList();
+            List<FeriadoCelebrado> feriadosEstaduais = feriado.FeriadosEstaduais(anoDoFeriado, estado, pais).ToList();
 
             // Assert
             for (int i = 1, j = feriadosEstaduais.Count - 1; i < j; i++)
@@ -118,7 +118,7 @@ namespace Bigai.Tools.Feriados.Tests
             Feriado feriado = Feriado.Factory(anoDoFeriado);
 
             // Act
-            List<FeriadoCelebrado> feriadosMunicipais = feriado.FeriadosMunicipais(codigoIbge).ToList();
+            List<FeriadoCelebrado> feriadosMunicipais = feriado.FeriadosMunicipais(anoDoFeriado, codigoIbge).ToList();
 
             // Assert
             Assert.True(feriadosEsperados == feriadosMunicipais.Count);
@@ -137,6 +137,34 @@ namespace Bigai.Tools.Feriados.Tests
 
             // Assert
             Assert.True(feriadosNaData.Count > 0);
+        }
+
+        [Theory]
+        [InlineData(2020, 01, "BR")]
+        public void Feriado_DeveRetornarListaDeFeriadosDoMes(int anoDoFeriado, int mesFeriado, string pais)
+        {
+            // Arrange
+            Feriado feriado = Feriado.Factory(anoDoFeriado);
+
+            // Act
+            List<FeriadoCelebrado> feriadosDoMes = feriado.FeriadosDoMes(anoDoFeriado, mesFeriado, pais).ToList();
+
+            // Assert
+            Assert.True(feriadosDoMes.Count > 0);
+        }
+
+        [Theory]
+        [InlineData(2020, 01, "BR", "SP")]
+        public void Feriado_DeveRetornarListaDeFeriadosDoMesDoEstado(int anoDoFeriado, int mesFeriado, string pais, string estado)
+        {
+            // Arrange
+            Feriado feriado = Feriado.Factory(anoDoFeriado);
+
+            // Act
+            List<FeriadoCelebrado> feriadosDoMes = feriado.FeriadosDoMes(anoDoFeriado, mesFeriado, estado, pais).ToList();
+
+            // Assert
+            Assert.True(feriadosDoMes.Count > 0);
         }
     }
 }

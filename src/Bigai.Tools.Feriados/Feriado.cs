@@ -56,11 +56,6 @@ namespace Bigai.Tools.Feriados
         /// </summary>
         public int AnoFeriado { get; private set; }
 
-        /// <summary>
-        /// Retorna uma lista com todos os feriados.
-        /// </summary>
-        public IReadOnlyCollection<FeriadoCelebrado> Feriados => _feriados.ToArray();
-
         #endregion
 
         #region Construtor
@@ -332,31 +327,190 @@ namespace Bigai.Tools.Feriados
         /// Retorna uma lista com todos os feriados nacionais, para um país específico.
         /// </summary>
         /// <param name="pais">Sigla do estado onde ocorre o feriado, composta por 2 letras. Default 'BR'.</param>
+        /// <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
         /// <returns>Retorna uma lista com todos os feriados nacionais do país solicitado.</returns>
-        public IReadOnlyCollection<FeriadoCelebrado> FeriadosNacionais(string pais = _brasil)
+        public IReadOnlyCollection<FeriadoCelebrado> FeriadosNacionais(int anoFeriado, string pais = _brasil)
         {
-            return _feriados.Where(feriado => feriado.Abrangencia == _nacional && feriado.Pais == pais).ToArray();
+            FeriadoCelebrado[] feriados;
+
+            if (anoFeriado == 0)
+            {
+                anoFeriado = AnoFeriado;
+            }
+
+            if (AnoFeriado != anoFeriado)
+            {
+                Feriado feriado = Factory(anoFeriado);
+                feriados = feriado._feriados.Where(feriado => feriado.Pais == pais).ToArray();
+                feriado.Dispose();
+            }
+            else
+            {
+                feriados = _feriados.Where(feriado => feriado.Abrangencia == _nacional && feriado.Pais == pais).ToArray();
+            }
+
+            return feriados;
         }
 
         /// <summary>
         /// Retorna uma lista com todos os feriados estaduais, para um estado específico.
         /// </summary>
+        /// <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
         /// <param name="estado">Sigla do estado onde ocorre o feriado, composta por 2 letras.</param>
         /// <param name="pais">Sigla do estado onde ocorre o feriado, composta por 2 letras. Default 'BR'.</param>
         /// <returns>Retorna uma lista com todos os feriados estaduais.</returns>
-        public IReadOnlyCollection<FeriadoCelebrado> FeriadosEstaduais(string estado, string pais = _brasil)
+        public IReadOnlyCollection<FeriadoCelebrado> FeriadosEstaduais(int anoFeriado, string estado, string pais = _brasil)
         {
-            return _feriados.Where(feriado => feriado.Abrangencia == _estadual && feriado.Estado == estado && feriado.Pais == pais).ToArray();
+            FeriadoCelebrado[] feriados;
+
+            if (anoFeriado == 0)
+            {
+                anoFeriado = AnoFeriado;
+            }
+
+            if (AnoFeriado != anoFeriado)
+            {
+                Feriado feriado = Factory(anoFeriado);
+                feriados = feriado._feriados.Where(feriado => feriado.Abrangencia == _estadual && feriado.Pais == pais && feriado.Estado == estado).ToArray();
+                feriado.Dispose();
+            }
+            else
+            {
+                feriados = _feriados.Where(feriado => feriado.Abrangencia == _estadual && feriado.Pais == pais && feriado.Estado == estado).ToArray();
+            }
+
+            return feriados;
         }
 
         /// <summary>
         /// Retorna uma lista com todos os feriados municipais, para um município especifico.
         /// </summary>
+        /// <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
         /// <param name="codigoMunicipio">Código do município, podendo ser informado o Código Federal ou Código do Ibge.</param>
         /// <returns>Retorna uma lista com todos os feriados municipais.</returns>
-        public IReadOnlyCollection<FeriadoCelebrado> FeriadosMunicipais(string codigoMunicipio)
+        public IReadOnlyCollection<FeriadoCelebrado> FeriadosMunicipais(int anoFeriado, string codigoMunicipio)
         {
-            return _feriados.Where(feriado => feriado.Abrangencia == _municipal && feriado.CodigoFederalMunicipio == codigoMunicipio || feriado.CodigoIbgeMunicipio == codigoMunicipio).ToArray();
+            FeriadoCelebrado[] feriados;
+
+            if (anoFeriado == 0)
+            {
+                anoFeriado = AnoFeriado;
+            }
+            
+            if (AnoFeriado != anoFeriado)
+            {
+                Feriado feriado = Factory(anoFeriado);
+                feriados = feriado._feriados.Where(feriado => feriado.Abrangencia == _municipal && feriado.CodigoFederalMunicipio == codigoMunicipio || feriado.CodigoIbgeMunicipio == codigoMunicipio).ToArray();
+                feriado.Dispose();
+            }
+            else
+            {
+                feriados = _feriados.Where(feriado => feriado.Abrangencia == _municipal && feriado.CodigoFederalMunicipio == codigoMunicipio || feriado.CodigoIbgeMunicipio == codigoMunicipio).ToArray();
+            }
+
+            return feriados;
+        }
+
+        /// <summary>
+        /// Retorna uma lista com todos os feriados.
+        /// </summary>
+        /// <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
+        /// <param name="pais">Sigla do estado onde ocorre o feriado, composta por 2 letras. Default 'BR'.</param>
+        /// <returns>Retorna uma lista com todos os feriados nacionais, estaduais e municipais do ano e país especificados.</returns>
+        public IReadOnlyCollection<FeriadoCelebrado> Feriados(int anoFeriado, string pais = _brasil)
+        {
+            FeriadoCelebrado[] feriados;
+
+            if (anoFeriado == 0)
+            {
+                anoFeriado = AnoFeriado;
+            }
+
+            if (AnoFeriado != anoFeriado)
+            {
+                Feriado feriado = Factory(anoFeriado);
+                feriados = feriado._feriados.Where(feriado => feriado.Pais == pais).ToArray();
+                feriado.Dispose();
+            }
+            else
+            {
+                feriados = _feriados.Where(feriado => feriado.Pais == pais).ToArray();
+            }
+
+            return feriados;
+        }
+
+        /// <summary>
+        /// Retorna uma lista com todos os feriados do mês.
+        /// </summary>
+        /// <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
+        /// <param name="mesFeriado">Mês do feriado desejado. Default mês corrente.</param>
+        /// <param name="pais">Sigla do estado onde ocorre o feriado, composta por 2 letras. Default 'BR'.</param>
+        /// <returns>Retorna uma lista com todos os feriados que ocorrem no mês.</returns>
+        public IReadOnlyCollection<FeriadoCelebrado> FeriadosDoMes(int anoFeriado, int mesFeriado, string pais = _brasil)
+        {
+            FeriadoCelebrado[] feriados;
+
+            if (anoFeriado == 0)
+            {
+                anoFeriado = AnoFeriado;
+            }
+            if (mesFeriado == 0)
+            {
+                mesFeriado = DateTime.Now.Month;
+            }
+
+            if (AnoFeriado != anoFeriado)
+            {
+                Feriado feriado = Factory(anoFeriado);
+                feriados = feriado._feriados.Where(feriado => feriado.DataFeriado.Month == mesFeriado && feriado.Pais == pais).ToArray();
+                feriado.Dispose();
+            }
+            else
+            {
+                feriados = _feriados.Where(feriado => feriado.DataFeriado.Month == mesFeriado && feriado.Pais == pais).ToArray();
+            }
+
+            return feriados;
+        }
+
+        /// <summary>
+        /// Retorna uma lista com todos os feriados do mês de um estado.
+        /// </summary>
+        /// <param name="anoFeriado">Ano do feriado desejado. Default ano corrente.</param>
+        /// <param name="mesFeriado">Mês do feriado desejado. Default mês corrente.</param>
+        /// <param name="estado">Sigla do estado onde ocorre o feriado, composta por 2 letras.</param>
+        /// <param name="pais">Sigla do estado onde ocorre o feriado, composta por 2 letras. Default 'BR'.</param>
+        /// <returns>Retorna uma lista com todos os feriados que ocorrem no mês no estado.</returns>
+        public IReadOnlyCollection<FeriadoCelebrado> FeriadosDoMes(int anoFeriado, int mesFeriado, string estado, string pais = _brasil)
+        {
+            FeriadoCelebrado[] feriados = null;
+
+            if (anoFeriado == 0)
+            {
+                anoFeriado = AnoFeriado;
+            }
+            
+            if (mesFeriado == 0)
+            {
+                mesFeriado = DateTime.Now.Month;
+            }
+            
+            if (!string.IsNullOrEmpty(estado))
+            {
+                if (AnoFeriado != anoFeriado)
+                {
+                    Feriado feriado = Factory(anoFeriado);
+                    feriados = feriado._feriados.Where(feriado => feriado.DataFeriado.Month == mesFeriado && feriado.Pais == pais && feriado.Estado == estado).ToArray();
+                    feriado.Dispose();
+                }
+                else
+                {
+                    feriados = _feriados.Where(feriado => feriado.DataFeriado.Month == mesFeriado && feriado.Pais == pais && feriado.Estado == estado).ToArray();
+                }
+            }
+
+            return feriados;
         }
 
         /// <summary>

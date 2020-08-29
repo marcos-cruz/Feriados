@@ -25,10 +25,11 @@ Disponibilizar uma biblioteca dotnet C#, que permita a consultar feriados Nacion
 
 # Recursos
 
-* Obter uma lista com todos os feriados de um ano específico.
-* Obter uma lista somente os feriados nacionais de um ano específico.
-* Obter uma lista somente com os feriados estaduais de um estado e ano especifico.
-* Obter uma lista somente com os feriados municipais de um município e ano específico.
+* Obter uma lista com todos os feriados de um ano.
+* Obter uma lista somente os feriados nacionais de um ano.
+* Obter uma lista somente com os feriados estaduais de um estado e ano específicos.
+* Obter uma lista somente com os feriados municipais de um município e ano específicos.
+* Obter uma lista com os feriados que ocorrem em um mês específico.
 * Obter os feriados que podem ocorrer em uma data específica.
 
 # Feriados Suportados
