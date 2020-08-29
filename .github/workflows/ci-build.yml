@@ -1,0 +1,47 @@
+name: CI - Build
+
+#
+# Evento que controla quando a Action é disparada. Neste caso é disparado quando ocorre um
+# push ou pull request em qualquer branch.
+#
+on:
+  push:
+  pull_request:
+
+jobs:
+  #
+  # Este workflow tem apenas um job para Build, mas que será executadoem três sistemas operacionais
+  # Linux, Windows e MacOs
+  #
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+    #
+    # Sequencia de execução das tarefas do job.
+    #
+    steps:
+    #
+    # Checkout o repositório para poder ter acesso a ele.
+    #
+    - uses: actions/checkout@v2
+    #
+    # Configura os pacotes nas versões necessárias
+    #
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.401
+    #
+    # Instala todas as depedências do projeto.
+    #
+    - name: Install dependencies
+      run: dotnet restore
+    #
+    # Faz o build do projeto.
+    #
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
