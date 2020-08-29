@@ -45,7 +45,6 @@ São suportados os Feriados Nacionais, Estaduais e Municipais.
 | 01 | 05 | Dia do Trabalho |
 | 07 | 09 | Independência do Brasil |
 | 12 | 10 | Nossa Senhora Aparecida |
-| 28 | 10 | Dia do Servidor Público |
 | 02 | 11 | Finados |
 | 15 | 11 | Proclamação da República |
 | 25 | 12 | Natal |
@@ -153,7 +152,7 @@ var feriadosNaData = feriado.EhFeriado(dataDoFeriado).ToList();
 
 # Contrato de Contribuição e Licença
 
-Se você deseja contribuir com código para este projeto, saiba que implicitamente está permitindo que seu código seja distribuído sob a licença ISC License. Você também assume a responsabilidade de:
+Se você deseja contribuir com código para este projeto, saiba que implicitamente está permitindo que seu código seja distribuído sob a licença GPL-3.0 License. Você também assume a responsabilidade de:
 
 1. Todo o código fonte fornecido, é obra original sua, ou;
 2. Atribuir corretamente a fonte de sua origem e licença.
