@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Bigai.Tools.Feriados.Tests")]
 namespace Bigai.Tools.Feriados.Helpers
@@ -29,13 +26,13 @@ namespace Bigai.Tools.Feriados.Helpers
         /// <returns>Lista contendo os feriados estaduais.</returns>
         internal static List<FeriadoCelebrado> ImportarFeriadosEstaduais(int anoFeriado, string abrangencia = "Estadual", string pais = "BR")
         {
-            List<FeriadoCelebrado> feriadosEstaduais = null;
+            List<FeriadoCelebrado> feriadosEstaduais = [];
 
             try
             {
                 string startupPath = AppDomain.CurrentDomain.BaseDirectory;
                 string arquivo = Path.Combine(startupPath, _feriadosEstaduaisCsv);
-                string[,] planilha = CsvHelper.LoadCsv(arquivo);
+                string[,]? planilha = CsvHelper.LoadCsv(arquivo);
 
                 if (planilha != null && planilha.GetLength(0) > 0)
                 {
@@ -79,9 +76,9 @@ namespace Bigai.Tools.Feriados.Helpers
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
 
             return feriadosEstaduais;

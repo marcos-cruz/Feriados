@@ -1,19 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Title>Bigai.Tools.Feriados, developed by Bigai Software.</Title>
     <Authors>Marcos Cruz, Bigai Consultoria Software</Authors>
-    <Copyright>Feriados - Copyright © 2020 - Bigai Consultoria Software.</Copyright>
-    <Company>Bigai Consultoria Software</Company>
+    <Company>Bigai Software, Santo André, SP, Brazil.</Company>
     <Description>Biblioteca de feriados no território Brasileiro.</Description>
     <RepositoryUrl>https://github.com/marcos-cruz/Feriados.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Feriado Nacional Estadual Municipal</PackageTags>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Projects\Bigai Software\Git\Feriados\src\Bigai.Tools.Feriados\Bigai.Tools.Feriados.xml</DocumentationFile>
+    <Copyright>Copyright ©2020-2024 Bigai Software, All rights reserved.</Copyright>
+    <NoWarn>$(NoWarn);1591</NoWarn>    
   </PropertyGroup>
 
   <ItemGroup>
